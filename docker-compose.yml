@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  postgresql:
+    image: postgres
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: click
+      POSTGRES_PASSWORD: clickpass1
+    volumes:
+      - demo-database:/var/lib/postgresql/data
+  java:
+    image: local_java_click:0.0.1
+    restart: always
+    ports:
+      - "8080:8080"
+  python:
+    image: local_python_click:0.0.2
+    restart: always
+    ports:
+      - "8000:8000"
+
+volumes:
+  demo-database:
+    driver: local
